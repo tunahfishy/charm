@@ -36,3 +36,48 @@
     transform: rotate(360deg);
   }
 }
+
+.layout {
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  height: calc(100% - 70px);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+  padding: 18px;
+  gap: 1rem;
+}
+
+button {
+  min-width: 135px;
+  border: 0;
+  padding: 10px;
+  border-radius: 18px;
+  font-weight: 600;
+  color: var(--primary-font-color);
+  max-width: 200px;
+}
+
+button:disabled {
+  background-color: var(--primary-disabled);
+}
+
+button:hover:enabled {
+  transition-duration: 0.1s;
+  cursor: pointer;
+  background-color: var(--primary-hover);
+}
+
+input {
+  padding: 8px;
+}
+
+textarea {
+  padding: 18px;
+  height: fit-content
+}

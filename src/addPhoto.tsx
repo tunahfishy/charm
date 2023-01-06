@@ -4,7 +4,7 @@ import { useState } from "react";
 import { storage } from "./firebase_setup/firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
-function addPhoto() {
+function AddPhoto() {
   const [imgUrl, setImgUrl] = useState<string | null>(null);
   const [progresspercent, setProgresspercent] = useState(0);
 
@@ -51,4 +51,4 @@ function addPhoto() {
     </div>
   );
 }
-export default addPhoto;
+export default AddPhoto;
