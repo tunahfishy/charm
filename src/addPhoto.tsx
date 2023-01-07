@@ -36,7 +36,8 @@ function AddPhoto() {
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={handleSubmit}>
+        <p>Attach a Photo</p>
         <input type="file" />
         <button type="submit">Upload</button>
       </form>

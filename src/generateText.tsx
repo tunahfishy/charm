@@ -4,7 +4,7 @@ import "./App.css";
 import { useEffect, useState, useInsertionEffect, useRef } from "react";
 import { valid } from "semver";
 
-const API_KEY = "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";
+const API_KEY = "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";
 const MODEL_ID = "text-davinci-003";
 
 const configuration = new Configuration({
@@ -59,6 +59,7 @@ function GenerateText(): JSX.Element {
     <div className="App">
       <div className="layout">
         <form onSubmit={handleSubmit}>
+            <p>Write a prompt for the type of email you want to send</p>
           <input type="text" placeholder="query" ref={dataRef} />
           <button type="submit">Submit</button>
           <textarea value={editableEmail} onChange={handleChange} />
