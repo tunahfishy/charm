@@ -1,11 +1,11 @@
 import { Configuration, OpenAIApi } from "openai";
 import axios from "axios";
 import "./App.css";
-import { useEffect, useState, useInsertionEffect, useRef } from "react";
-import { valid } from "semver";
+import { useState, useRef } from "react";
 
-const API_KEY = "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";
-const MODEL_ID = "text-davinci-003";
+
+// TODO: REPLACE
+const API_KEY = "sk-replace";
 
 const configuration = new Configuration({
   organization: "org-9AXU57OVamayjrkxMCoA4cwK",
@@ -21,7 +21,7 @@ function GenerateText(): JSX.Element {
   const handleSubmit = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
 
-    const response = axios
+    axios
       .post(
         `https://api.openai.com/v1/engines/text-davinci-003/completions`,
         {
@@ -59,7 +59,12 @@ function GenerateText(): JSX.Element {
     <div className="App">
       <div className="layout">
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="query" ref={dataRef} />
+          <p>Write a prompt for the type of email you want to send</p>
+          <input
+            type="text"
+            placeholder="Write a heartfelt birthday message"
+            ref={dataRef}
+          />
           <button type="submit">Submit</button>
           <textarea value={editableEmail} onChange={handleChange} />
           <button onClick={handleSend}>Send</button>
