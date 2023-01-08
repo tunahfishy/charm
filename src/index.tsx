@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import {App, AuthRedirect} from "./App";
 import AddPhoto from "./addPhoto";
 import GenerateText from "./generateText";
 import { Route, Routes } from "react-router";
@@ -13,6 +13,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/auth_redirect" element={<AuthRedirect />} />
         <Route path="photos" element={<AddPhoto />} />
         <Route path="generateText" element={<GenerateText />} />
         <Route path="*" element={<h1>Route does not exist</h1>} />
