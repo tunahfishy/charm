@@ -82,5 +82,36 @@ input {
 
 textarea {
   padding: 18px;
-  height: fit-content
+  height: fit-content;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+.title {
+  font-size: 72px;
+  font-weight: 900;
+  background-color: rgba(0, 0, 0, 0.827);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  padding: 1.5rem;
+}
+
+.slogan {
+  font-size: 24px;
+  background-color: rgba(0, 0, 0, 0.827);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  padding-bottom: 1.5rem;
 }
