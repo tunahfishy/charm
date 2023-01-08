@@ -12,17 +12,19 @@ import { NextUIProvider } from "@nextui-org/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/auth_redirect" element={<AuthRedirect />} />
-        <Route path="photos" element={<AddPhoto />} />
-        <Route path="generateText" element={<GenerateText />} />
-        <Route path="/email" element={<Email />} />
-          <Route path="/profiles" element={<Profiles />} />
-        <Route path="*" element={<h1>Route does not exist</h1>} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+  <NextUIProvider>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/auth_redirect" element={<AuthRedirect />} />
+          <Route path="photos" element={<AddPhoto />} />
+          <Route path="generateText" element={<GenerateText />} />
+          <Route path="/email" element={<Email />} />
+            <Route path="/profiles" element={<Profiles />} />
+          <Route path="*" element={<h1>Route does not exist</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
+  </NextUIProvider>
 );
