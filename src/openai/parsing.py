@@ -1,17 +1,28 @@
-# import pandas as pd
-# import openpyxl 
+import pprint
+import pandas as pd
+import openpyxl 
 
-## parse inputs into something that will be transformed into embeddings
+# parse inputs into something that will be transformed into embeddings
 
-# ws = openpyxl.load_workbook('emails.xlsx')
-# print(ws.title)
-# ncols = len(ws[1])
+# Read data from file 'filename.csv' 
+data = pd.read_csv("cohort2bios.csv") 
+
+# for row in data: 
+#     print(row)
+data.to_dict('series')
+dict = {}
+for i in range(52):
+    dict[data["Name"][i]] = {"bio":data["Bio (~100 words)"][i]}
+print(dict)
+# for key,v in data.items():
+#     print(key)
+#     print()
 
 # first_row = [] # The row where we stock the name of the column
 # for col in range(1,ncols):
 #     first_row.append(ws.cell(1,col) )
 # print(first_row)
-# # transform the workbook to a list of dictionnary
+# transform the workbook to a list of dictionnary
 # data = {}
 
 # # make each row into all_bios = {name0: {"bio": bio}, name1: {"bio": bio}}

@@ -1,14 +1,19 @@
 from collections import namedtuple
 import numpy as np
 import json
-import os, pickle, traceback
+import os, traceback
 from tqdm import tqdm
 import numpy as np
+import openai
 from openai.embeddings_utils import get_embedding
 import faiss
-import openai
+from dotenv import load_dotenv
 
-openai.api_key = "REPLACE"
+
+load_dotenv()
+print(os.environ["OPENAI_SECRET_KEY"])
+openai.api_key = os.environ['OPENAI_SECRET_KEY']
+
 
 Engine = namedtuple('Engine', ['index', 'data'])
 
@@ -26,7 +31,7 @@ def init_engine(embeddings_dir):
     # print('Loaded {} embeddings'.format(len(all_data)))
 
     with open(embeddings_dir, "rb") as f:
-        all_bios = pickle.load(f)
+        all_bios = json.load(f)
         
     # generate a dense numpy array of all the embeddings
     # all_bios = [{"name": name, "bio": bio, "embeddings": []}, {"name":name, "bio": bio, "embeddings": []}}
@@ -52,11 +57,11 @@ def query_knn(engine, query, query_type='query', k=5):
     embedding /= np.linalg.norm(embedding)
     print(embedding.shape)
     D, I = engine.index.search(np.array([embedding]), k)
-    return D, [engine.data[i] for i in I[0]]
+    return D, [engine.data[i]["name"] for i in I[0]]
 
 
-engine = init_engine("src/openai/embeddings.pkl")
+engine = init_engine("embeddingsBios.json")
 # query = "who is the best CTO for my potential startup idea?"
-query = "software engineer"
+query = "Who at MIT is best at Machine Learning?"
 D, I = query_knn(engine, query)
 print(D, str(I))
