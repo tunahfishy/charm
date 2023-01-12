@@ -61,7 +61,6 @@ def query_knn(engine, query, query_type='query', k=5):
 
 
 engine = init_engine("embeddingsBios.json")
-# query = "who is the best CTO for my potential startup idea?"
-query = "Who at MIT is best at Machine Learning?"
+query = "who is the best CTO for my potential startup idea?"
 D, I = query_knn(engine, query)
 print(D, str(I))
