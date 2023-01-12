@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import {App, AuthRedirect} from "./App";
+import AddPhoto from "./addPhoto";
+import GenerateText from "./generateText";
 import Email from "./pages/email";
 import Profiles from "./pages/profiles";
 import { Route, Routes } from "react-router";
@@ -19,6 +21,9 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/auth_redirect" element={<AuthRedirect />} />
+          <Route path="photos" element={<AddPhoto />} />
+          <Route path="generateText" element={<GenerateText />} />
           <Route path="/email" element={<Email />} />
           <Route path="/profiles" element={<Profiles />} />
           <Route path="/features" element={<Features />} />

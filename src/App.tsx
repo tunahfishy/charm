@@ -42,4 +42,26 @@ function App() {
   );
 }
 
-export default App;
+function AuthRedirect() {
+  useEffect(() => {
+    console.log(window.location.search)
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const scope = urlParams.get('scope');
+
+    console.log(code)
+    if (code) {
+      // send the code to the server side and redirect them to the home page
+      fetch("http://localhost:4000/auth/save_credentials?code=" + code).then((res) => res.text()).then((token) => {
+        window.location.href = "http://localhost:3000";
+      })
+    }
+  }, []);
+  return (
+    <div className="App">
+      <h1>Redirecting...</h1>
+    </div>
+  );
+}
+
+export {App, AuthRedirect};
