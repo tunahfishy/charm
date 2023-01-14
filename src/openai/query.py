@@ -1,7 +1,8 @@
 from collections import namedtuple
 import numpy as np
 import json
-import os, traceback
+import os
+import traceback
 from tqdm import tqdm
 import numpy as np
 import openai
@@ -9,13 +10,13 @@ from openai.embeddings_utils import get_embedding
 import faiss
 from dotenv import load_dotenv
 
-
 load_dotenv()
 print(os.environ["OPENAI_SECRET_KEY"])
 openai.api_key = os.environ['OPENAI_SECRET_KEY']
 
 
 Engine = namedtuple('Engine', ['index', 'data'])
+
 
 def init_engine(embeddings_dir):
     # go through all the files in the embeddings directory that end in .json
@@ -32,7 +33,7 @@ def init_engine(embeddings_dir):
 
     with open(embeddings_dir, "rb") as f:
         all_bios = json.load(f)
-        
+
     # generate a dense numpy array of all the embeddings
     # all_bios = [{"name": name, "bio": bio, "embeddings": []}, {"name":name, "bio": bio, "embeddings": []}}
     all_embeddings = np.array([x['embedding'] for x in all_bios])
@@ -40,13 +41,16 @@ def init_engine(embeddings_dir):
     print('Normalized {} embeddings'.format(all_embeddings.shape))
     index = faiss.IndexFlatIP(all_embeddings.shape[1])
     index.add(all_embeddings)
-    
+
     for x in all_bios:
-        del x['embedding'] # we don't need this anymore. (i think we can keep this for now)
+        # we don't need this anymore. (i think we can keep this for now)
+        del x['embedding']
 
     return Engine(index, all_bios)
 
 # Engine should be one of "query", "doc"
+
+
 def query_knn(engine, query, query_type='query', k=5):
     try:
         query_engine = 'text-search-ada-{}-001'.format(query_type)

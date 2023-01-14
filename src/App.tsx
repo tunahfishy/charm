@@ -4,6 +4,11 @@ import handleSubmit from "./handles/handlesubmit";
 import React from "react";
 import { Link, Button } from "@nextui-org/react";
 
+// get variable from .env file
+const { SERVER_URL, WEB_URL } = {
+  SERVER_URL: "https://light-hounds-lie-186-209-159-5.loca.lt",
+  WEB_URL: "https://3050-186-209-159-5.ngrok.io",
+};
 
 function App() {
   // const dataRef = useRef<HTMLInputElement>(null);
@@ -16,13 +21,15 @@ function App() {
   //   }
   // };
 
-  // send a GET request to the server
-  useEffect(() => {
-    /*
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-      */
-  }, []);
+  const get_auth_url = async () => {
+    console.log(SERVER_URL + "/auth/get_auth_url");
+    fetch(SERVER_URL + "/auth/get_auth_url")
+      .then((res) => res.text())
+      .then((url) => {
+        // redirect the user
+        window.open(url, "_blank", "noreferrer");
+      });
+  };
 
   return (
     <div className="App">
@@ -44,17 +51,34 @@ function App() {
 
 function AuthRedirect() {
   useEffect(() => {
-    console.log(window.location.search)
     const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const scope = urlParams.get('scope');
-
-    console.log(code)
+    const code = urlParams.get("code");
+    const scope = urlParams.get("scope");
     if (code) {
-      // send the code to the server side and redirect them to the home page
-      fetch("http://localhost:4000/auth/save_credentials?code=" + code).then((res) => res.text()).then((token) => {
+      /*
+      fetch("https://red-items-kneel-186-209-159-5.loca.lt/ping/", {
+        mode: 'cors',
+        headers:{
+          'Access-Control-Allow-Origin':'*'
+        }
+      }).then((res) => res.text()).then((token) => {
+        console.log("Will redirect you")
         window.location.href = "http://localhost:3000";
+      })*/
+
+      // send the code to the server side and redirect them to the home page
+      fetch(SERVER_URL + "/auth/save_credentials?code=" + code, {
+        mode: "cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
       })
+        .then((res) => res.text())
+        .then((token) => {
+          console.log("Will redirect you");
+          // @ts-ignore
+          window.location.href = WEB_URL;
+        });
     }
   }, []);
   return (
@@ -64,4 +88,4 @@ function AuthRedirect() {
   );
 }
 
-export {App, AuthRedirect};
+export { App, AuthRedirect };
