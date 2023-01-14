@@ -4,7 +4,8 @@ import "./App.css";
 import { useState, useRef } from "react";
 
 // TODO: REPLACE
-const API_KEY = "sk-replace";
+const API_KEY = "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";
+// const API_KEY = "sk-replace";
 
 const configuration = new Configuration({
   organization: "org-9AXU57OVamayjrkxMCoA4cwK",
