@@ -6,8 +6,8 @@ import { Link, Button } from "@nextui-org/react";
 
 // get variable from .env file
 const { SERVER_URL, WEB_URL } = {
-  SERVER_URL: "https://light-hounds-lie-186-209-159-5.loca.lt",
-  WEB_URL: "https://3050-186-209-159-5.ngrok.io",
+  SERVER_URL: "https://charmserver-production.up.railway.app",
+  WEB_URL: "https://projectunicorn-2463b.web.app",
 };
 
 function App() {
@@ -55,16 +55,8 @@ function AuthRedirect() {
     const code = urlParams.get("code");
     const scope = urlParams.get("scope");
     if (code) {
-      /*
-      fetch("https://red-items-kneel-186-209-159-5.loca.lt/ping/", {
-        mode: 'cors',
-        headers:{
-          'Access-Control-Allow-Origin':'*'
-        }
-      }).then((res) => res.text()).then((token) => {
-        console.log("Will redirect you")
-        window.location.href = "http://localhost:3000";
-      })*/
+      console.log("Got the code")
+
 
       // send the code to the server side and redirect them to the home page
       fetch(SERVER_URL + "/auth/save_credentials?code=" + code, {

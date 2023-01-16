@@ -1,10 +1,14 @@
 import { Link, Button } from "@nextui-org/react";
 import "./navbar.css";
 import { useEffect, useState } from "react";
+const { SERVER_URL, WEB_URL } = {
+  SERVER_URL: "https://charmserver-production.up.railway.app",
+  WEB_URL: "https://projectunicorn-2463b.web.app"
+};
 
 const Navbar = () => {
   const get_auth_url = async () => {
-    fetch("http://localhost:4000/auth/get_auth_url")
+    fetch(SERVER_URL + "/auth/get_auth_url")
       .then((res) => res.text())
       .then((url) => {
         // redirect the user
